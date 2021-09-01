@@ -1,0 +1,17 @@
+#Script de copia de arquivos para backup para outro servidor 
+#Backup archives
+# By Andre R Mendes
+# 24/03/2009
+
+export Log=/mnt/bkp/Logs/log-copia-archives-$(date +%d%m%y-%H%M)
+export data=archive-$(date +%d%m%y-%H%M)
+date >> $Log
+echo .
+echo "Inicio Copia arquivos Oracle - Archives" >> $Log 2>&1
+echo .
+tar czvf /mnt/bkp/Archive/$data.tar.gz /u01/backup/archive/ --totals >> $Log 2>&1
+
+echo .
+echo "Fim da copia arquivos Oracle - Archives" >> $Log 2>&1
+date >> $Log
+
