@@ -1,0 +1,32 @@
+#!/bin/sh
+
+#Andre 010812
+#trocar password pela senha e root pelo usuario
+
+
+data=`date '+%d%m%y'`
+
+log="log_bkp_aplicweb_"$data
+touch /mnt/backup/log/$log
+inicio=`date '+%H:%M'`
+echo "Inicio do Backup Aplic-WEB: "$inicio >> /mnt/backup/log/$log
+
+
+mysqldump -u root -ppassword -x -e -B limesurvey | gzip > /mnt/backup/aplic-web/limesurvey.sql.gz
+echo "Backup BD - Lime Survey Realizado..." >> /mnt/backup/log/$log
+
+mysqldump -u root -ppassword -x -e -B wikihes | gzip > /mnt/backup/aplic-web/wikihes.sql.gz
+echo "Backup BD - Wiki Realizado..." >> /mnt/backup/log/$log
+
+mysqldump -u root -ppassword -x -e -B dotproject | gzip > /mnt/backup/aplic-web/dproject.sql.gz
+echo "Backup BD - DotProject Realizado..." >> /mnt/backup/log/$log
+
+mysqldump -u root -ppassword -x -e -B db_hes | gzip > /mnt/backup/aplic-web/noticia-hes.sql.gz
+echo "Backup BD - Noticias Realizado" >> /mnt/backup/log/$log
+
+mysqldump -u root -ppassword -x -e -B joomla | gzip > /mnt/backup/aplic-web/joomla-hes.sql.gz
+echo "Backup BD - Joomla Realizado" >> /mnt/backup/log/$log
+
+fim=`date '+%H:%M'`
+echo "Fim do Backup Aplica-WEB - Lista Backups realizados acima. com fim em: "$fim >> /mnt/backup/log/$log
+

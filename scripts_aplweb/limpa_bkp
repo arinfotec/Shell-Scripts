@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#######################################
+#Script de LIMPEZA backup do Linux
+#Andre Mendes - 20-11-12 
+#######################################
+data=`date '+%d%m%y'`
+arq="log_limpa_bkp"
+touch /home/armendes/scripts/log/$arq
+
+echo "Limpeza de Backup - Lista de arquivos do backup...: $data" >> /home/armendes/scripts/log/$arq
+echo "---------------------------------------------------------------" >> /home/armendes/scripts/log/$arq
+ls -l /home/backup_bd/ >> /home/armendes/scripts/log/$arq
+rm /home/backup_bd/*
+
+echo "---------------------------------------------------------------" >> /home/armendes/scripts/log/$arq
+
+

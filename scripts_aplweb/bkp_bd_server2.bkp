@@ -1,0 +1,43 @@
+#!/bin/sh
+
+#Andre 010812
+
+data=`date '+%d%m%y'`
+
+log="log_bkp_aplicweb_"$data
+touch /mnt/backup/log/$log
+inicio=`date '+%H:%M'`
+echo "Inicio do Backup Aplic-WEB: "$inicio >> /mnt/backup/log/$log
+
+
+mysqldump -u root -ppassword -x -e -B limesurvey | gzip > /mnt/backup/aplic-web/limesurvey.sql.gz
+echo "Backup BD - Lime Survey Realizado..." >> /mnt/backup/log/$log
+mysqldump -u root -ppassword -x -e -B limesurvey | gzip > /home/backup_bd/limesurvey.sql.gz
+
+mysqldump -u root -ppassword -x -e -B wikihes | gzip > /mnt/backup/aplic-web/wikihes.sql.gz
+echo "Backup BD - Wiki Realizado..." >> /mnt/backup/log/$log
+mysqldump -u root -ppassword -x -e -B wikihes | gzip > /home/backup_bd/wikihes.sql.gz
+
+mysqldump -u root -ppassword -x -e -B dotproject | gzip > /mnt/backup/aplic-web/dproject.sql.gz
+echo "Backup BD - DotProject Realizado..." >> /mnt/backup/log/$log
+mysqldump -u root -ppassword -x -e -B dotproject | gzip > /home/backup_bd/dproject.sql.gz
+
+mysqldump -u root -ppassword -x -e -B db_hes | gzip > /mnt/backup/aplic-web/noticia-hes.sql.gz
+echo "Backup BD - Noticias Realizado" >> /mnt/backup/log/$log
+mysqldump -u root -ppassword -x -e -B db_hes | gzip > /home/backup_bd/noticia-hes.sql.gz
+
+mysqldump -u root -ppassword -x -e -B joomla | gzip > /mnt/backup/aplic-web/joomla-hes.sql.gz
+echo "Backup BD - Joomla Realizado" >> /mnt/backup/log/$log
+mysqldump -u root -ppassword -x -e -B joomla | gzip > /home/backup_bd/joomla-hes.sql.gz
+
+mysqldump -u root -ppassword -x -e -B joomlahes | gzip > /mnt/backup/aplic-web/joomlahes-hes.sql.gz
+echo "Backup BD - Joomlahes Realizado" >> /mnt/backup/log/$log
+mysqldump -u root -ppassword -x -e -B joomlahes | gzip > /home/backup_bd/joomlahes-hes.sql.gz
+
+cp /home/backup_bd/aplicacoes* /mnt/backup/aplic-web/
+
+#tar -czvf /mnt/backup/apilca-web/aplicacoes_aplicaweb.tar.gz /var/www/html/*
+
+fim=`date '+%H:%M'`
+echo "Fim do Backup Aplica-WEB - Lista Backups realizados acima. com fim em: "$fim >> /mnt/backup/log/$log
+

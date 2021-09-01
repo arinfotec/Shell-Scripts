@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#Andre Mendes 010812
+#scrip para dump de banco de dados musql
+#trocar password pelas senhas
+
+data=`date '+%d%m%y'`
+
+mysqldump -u root -ppassword -x -e -B limesurvey | gzip > /mnt/bkp/backup/aplic-web/limesurvey.sql.gz
+echo "Backup BD - Lime Survey Realizado: $data" >> /mnt/bkp/backup/log2/log_bkp_aplicweb.txt
+mysqldump -u root -ppassword -x -e -B limesurvey | gzip > /home/bkp_bd/limesurvey.sql.gz
+
+
+mysqldump -u root -ppassword -x -e -B wikihes | gzip > /mnt/bkp/backup/aplic-web/wikihes.sql.gz
+echo "Backup BD - Wiki Realizado: $data" >> /mnt/bkp/backup/log2/log_bkp_aplicweb.txt
+mysqldump -u root -ppassword -x -e -B wikihes | gzip > /home/bkp_bd/wikihes.sql.gz
+
+
+mysqldump -u root -ppassword -x -e -B dotproject | gzip > /mnt/bkp/backup/aplic-web/dproject.sql.gz
+echo "Backup BD - DotProject Realizado: $data" >> /mnt/bkp/backup/log2/log_bkp_aplicweb.txt
+mysqldump -u root -ppassword -x -e -B dotproject | gzip > /home/bkp_bd/dproject.sql.gz
+
+
+mysqldump -u root -ppassword -x -e -B db_hes | gzip > /mnt/bkp/backup/aplic-web/noticia-hes.sql.gz
+echo "Backup BD - Noticias Realizado: $data" >> /mnt/bkp/backup/log2/log_bkp_aplicweb.txt
+mysqldump -u root -ppassword -x -e -B db_hes | gzip > /home/bkp_bd/noticia-hes.sql.gz
+
+
+mysqldump -u root -ppassword -x -e -B joomla | gzip > /mnt/backup/aplic-web/joomla-hes.sql.gz
+echo "Backup BD - Joomla Realizado: $data" >> /mnt/backup/log2/log_bkp_aplicweb.txt
+mysqldump -u root -ppassword -x -e -B joomla | gzip > /home/bkp_bd/joomla-hes.sql.gz
+
+mysqldump -u root -ppassword -x -e -B joomlahes | gzip > /mnt/backup/aplic-web/joomlahes-hes.sql.gz
+echo "Backup BD - Joomlahes Realizado: $data" >> /mnt/backup/log2/log_bkp_aplicweb.txt
+mysqldump -u root -ppassword -x -e -B joomlahes | gzip > /home/bkp_bd/joomlahes-hes.sql.gz
+
