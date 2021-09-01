@@ -1,0 +1,10 @@
+#!/bin/sh
+data=`date '+%d%m%y'`
+arq="log_usr_"$data
+touch /mnt/bkp/backup/jade/log/$arq
+inicio=`date '+%H:%M'`
+echo "Inicio do Backup: "$inicio >> /mnt/bkp/backup/jade/log/$arq
+tar -czvf /mnt/bkp/backup/jade/usr_$data.tar.gz /usr/local/etc/apache22/ /usr/local/apache2/ 
+tar -czvf /mnt/bkp/backup/jade/etc_$data.tar.gz /etc
+fim=`date '+%H:%M'`
+echo "Fim do backup: "$fim >> /mnt/bkp/backup/jade/log/$arq

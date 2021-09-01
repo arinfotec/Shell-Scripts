@@ -1,0 +1,10 @@
+#!/bin/sh
+data=`date '+%d%m%y'`
+arq="log_NS_"$data
+touch /mnt/backup/log/$arq
+inicio=`date '+%H:%M'`
+echo "Inicio do Backup: "$inicio >> /mnt/backup/log/$arq
+tar -czvf /mnt/backup/ns/var_named_$data.tar.gz /var/named/* 
+tar -czvf /mnt/backup/ns/etc_$data.tar.gz /etc/*
+fim=`date '+%H:%M'`
+echo "Fim do backup: "$fim >> /mnt/backup/log/$arq
